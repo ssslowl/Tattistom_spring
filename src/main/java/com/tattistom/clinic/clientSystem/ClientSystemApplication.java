@@ -1,4 +1,4 @@
-package com.tattistom.clinic.ClientSystem;
+package com.tattistom.clinic.clientSystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
