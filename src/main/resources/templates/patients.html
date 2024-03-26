@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Список пользователей</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <style>
+        /* Белый фон */
+        body, .w3-container {
+            background-color: #fff;
+            color: #000000;
+        }
+
+        /* Оранжевые элементы */
+        .w3-teal, .w3-button, .w3-table-all, .w3-table-header, .w3-table-cell {
+            background-color: #f06c00;
+            color: #000000;
+        }
+
+        /* Дополнительные оранжевые элементы */
+        .w3-teal.w3-hover, .w3-button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Заголовки таблицы */
+        .w3-table-header th {
+            font-weight: bold;
+            color: #000; /* Изменение цвета текста на белый */
+            text-align: left; /* Выравнивание текста по левому краю */
+            padding: 10px; /* Добавление отступов для заголовков */
+        }
+
+        /* Строки таблицы */
+        .w3-table-all tr:nth-child(even) {
+            background-color: #f9f9f9; /* Изменение цвета фона для четных строк */
+        }
+
+        .w3-table-all tr:hover {
+            background-color: #ddd; /* Изменение цвета фона при наведении */
+        }
+
+        /* Ячейки таблицы */
+        .w3-table-cell {
+            padding: 10px; /* Добавление отступов для ячеек */
+            border-bottom: 1px solid #ddd; /* Добавление границы снизу каждой ячейки */
+        }
+
+
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6600;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="datetime-local"],
+        input[type="text"],
+        input[type="date"],
+        input[type="checkbox"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc5500;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ff6600;
+            border-radius: 5px;
+            background-color: #fff8e6;
+            position: relative;
+        }
+
+        .deleteBtn,
+        .editBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #dc3545;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .deleteBtn:hover,
+        .editBtn:hover {
+            background-color: #bd2130;
+        }
+
+        #patientForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .attendance {
+            display: flex;
+            width: min-content;
+            align-self: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        label{
+            margin-left: 5px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<div th:insert="nav.html"></div>
+
+<div class="w3-container" >
+    <h1>Список пользователей</h1>
+
+    <div class="w3-responsive">
+        <table class="w3-table-all" >
+            <tr class="w3-table-header">
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Возраст</th>
+                <th>ИИН</th>
+                <th>Номер телефона</th>
+                <th>Email</th>
+                <th>Адрес</th>
+            </tr>
+            <tr th:each="p:${patients}">
+                <td th:text="${p.getId()}">1</td>
+                <td th:text="${p.getFirstName() + ' ' + p.lastName}">John Doe</td>
+                <td th:text="${p.getAge()}">30</td>
+                <td th:text="${p.getIin()}">30</td>
+                <td th:text="${p.getPhoneNumber()}">123-456-7890</td>
+                <td th:text="${p.email}">johndoe@example.com</td>
+                <td th:text="${p.getAddress()}">123 Main St, City, Country</td>
+            </tr>
+        </table>
+        <input type="button" value="Добавить пациента" class="w3-btn w3-ripple w3-orange" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Patient Records</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="patientForm" action="/patients" method="post">
+                <div class="modal-body">
+                    <label for="first_name">Имя</label>
+                    <input type="text" id="first_name"  name = "firstName" placeholder="Enter first name" required>
+
+                    <label for="last_name">Фамилия</label>
+                    <input type="text" id="last_name" name = "lastName" placeholder="Enter last name" required>
+
+                    <label for="birthDate">Возраст</label>
+                    <input type="number" name = "age" id="birthDate" required>
+
+                    <label for="iin">ИИН</label>
+                    <input type="text" id="iin" name= "iin"placeholder="Enter identification number" required>
+
+                    <label for="address">Адрес</label>
+                    <input type="text" id="address" name = "address" placeholder="Введите адрес" required>
+
+                    <label for="email">Электронная почта</label>
+                    <input type="text" id="email" name="email" placeholder="Введите почту" required>
+
+                    <label for="phone_number">Номер телефона</label>
+                    <input type="text" name = "phoneNumber" id="phone_number" placeholder="Введите почту" required>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="addBtn">Add Patient</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

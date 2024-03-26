@@ -11,16 +11,87 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
         body{
-            height: 100vh;
-            width: 100vw;
+            font-family: sans-serif;
+            color: #fff;
             display: flex;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFA05B;
+        }
+
+
+        .labelform{
+            margin: 10px;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        label{
+            margin: 10px;
+        }
+
+
+        .logo, .loginform{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        input{
-            margin-bottom: 10px;
+
+        .loginform{
+            background-color: #FFBE8E;
         }
+
+        .textinput{
+
+            height: 52px;
+            width: 458px;
+            border-radius: 24px;
+            border: none;
+            padding: 15px;
+            font-size: 25px;
+        }
+        .passinput{
+            height: 52px;
+            width: 458px;
+            border-radius: 24px;
+            border: none;
+            padding: 15px;
+            font-size: 25px;
+        }
+
+
+        .buttonform{
+            display: flex;
+            justify-content: end;
+            color: #fff;
+        }
+
+        #submitButton{
+            margin: 10px;
+            color: #fff;
+            height: 52px;
+            width: 100px;
+            border-radius: 24px;
+            border: none;
+            background-color: #FFA05B;
+            font-size: 25px;
+        }
+
+        #submitButton:hover{
+            background-color: #ff9f5bcd;
+        }
+
     </style>
 </head>
 <body>
@@ -30,17 +101,109 @@
 <!--    <div><input type="submit" value="Sign In"/></div>-->
 <!--</form>-->
 
-        <form th:action="@{/login}" method="post" class="d-flex flex-column justify-content-center align-items-center">
-            <input type="text" name="username" id="username" placeholder="username" class="form-control-lg">
-            <input type="password" name="password" id="password" placeholder="password" class="form-control-lg">
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-danger">
-                You have been logged out.
-            </div>
-            <input type="submit" value="login" class="btn btn-primary">
-        </form>
+<!--        <form th:action="@{/login}" method="post" class="d-flex flex-column justify-content-center align-items-center">-->
+<!--            <input type="text" name="username" id="username" placeholder="username" class="form-control-lg">-->
+<!--            <input type="password" name="password" id="password" placeholder="password" class="form-control-lg">-->
+<!--            <div th:if="${param.error}" class="alert alert-danger">-->
+<!--                Invalid username and password.-->
+<!--            </div>-->
+<!--            <div th:if="${param.logout}" class="alert alert-danger">-->
+<!--                You have been logged out.-->
+<!--            </div>-->
+<!--            <input type="submit" value="login" class="btn btn-primary">-->
+
+
+<!--        </form>-->
+
+<!--<img src="../img/sample.jpg" style="width: 100px; height: 200px" alt="">-->
+
+
+
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div class="logo">
+    <div class="img">
+        <h1>There must be a logo</h1>
+    </div>
+
+</div>
+<div class="loginform">
+    <h1>Авторизация в системе</h1>
+    <form th:action="@{/login}" method="post">
+        <div class="labelform">
+            <label for="login">логин</label>
+            <input type="text" name="username" id="login" class="textinput">
+        </div>
+        <div class="labelform">
+            <label for="password">пароль</label>
+            <input type="password" name="password" id="password" class="passinput">
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger" style="border-radius: 25px;height: 52px;width: 458px; margin-left: 10px">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-danger border-radius-25">
+            You have been logged out.
+        </div>
+        <div class="buttonform">
+            <button type="submit" value="Войти" id="submitButton">Войти</button>
+        </div>
+    </form>
+</div>
+
 
 </body>
 </html>
+<!--<section class="vh-100 vw-100 gradient-custom">-->
+<!--    <div class="container py-5 h-10">-->
+<!--        <div class="row d-flex justify-content-center align-items-center h-100">-->
+<!--            <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
+<!--                <div class="card bg-dark text-white" style="border-radius: 1rem;">-->
+<!--                    <div class="card-body p-5 text-center">-->
+
+<!--                        <div class="mb-md-5 mt-md-4 pb-5">-->
+<!--                            <form th:action="@{/login}" method="post" class="d-flex flex-column justify-content-center align-items-center">-->
+
+<!--                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>-->
+<!--                            <p class="text-white-50 mb-5">Please enter your login and password!</p>-->
+
+<!--                            <div class="form-outline form-white mb-4">-->
+<!--                                <input type="text"  name="username" id="typeEmailX" class="form-control form-control-lg" />-->
+<!--                                <label class="form-label" for="typeEmailX">Email</label>-->
+<!--                            </div>-->
+
+<!--                            <div class="form-outline form-white mb-4">-->
+<!--                                <input type="password" name = "password" id="typePasswordX" class="form-control form-control-lg" />-->
+<!--                                <label class="form-label" for="typePasswordX">Password</label>-->
+<!--                            </div>-->
+
+<!--                                <div th:if="${param.error}" class="alert alert-danger">-->
+<!--                                    Invalid username and password.-->
+<!--                                </div>-->
+<!--                                <div th:if="${param.logout}" class="alert alert-danger">-->
+<!--                                    You have been logged out.-->
+<!--                                </div>-->
+
+<!--                            <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
+
+<!--                            <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>-->
+
+
+<!--                            </form>-->
+
+<!--                        </div>-->
+
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--</body>-->
+<!--</html>-->
